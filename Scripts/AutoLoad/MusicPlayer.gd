@@ -3,12 +3,13 @@ extends AudioStreamPlayer
 var last_button
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	finished.connect(_finished)
 
 func _finished():
 	print("oi")
-	last_button.texture_normal = preload("uid://4av6wmow3713")
-	last_button = null
+	if last_button:
+		last_button.texture_normal = preload("uid://4av6wmow3713")
+		last_button = null
 
 func load_song(path, button):
 	print(last_button)

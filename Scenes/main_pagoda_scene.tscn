@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://qlw6u1ixbay2"]
 
 [ext_resource type="Script" uid="uid://pcu6c0a1kjos" path="res://Scripts/main_script.gd" id="1_yihkk"]
-[ext_resource type="PackedScene" uid="uid://dk4la8k31vvpq" path="res://Scenes/base_song.tscn" id="2_3e2vk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8tt50"]
 bg_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
@@ -129,9 +128,12 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
 
-[node name="BaseSong" parent="." unique_id=164003104 instance=ExtResource("2_3e2vk")]
-layout_mode = 0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 264.0
-offset_bottom = 86.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer/TabContainer/SongsTab/VBoxContainer/PanelContainer" unique_id=25955537]
+layout_mode = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="MainContainer/TabContainer/SongsTab/VBoxContainer/PanelContainer/HBoxContainer" unique_id=1724543061]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Export Selected
+"

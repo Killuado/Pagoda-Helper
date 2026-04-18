@@ -48,13 +48,20 @@ func _init_song_data():
 		queue_free()
 		return
 	
+	
 	var meta_path = song_folder + "/Meta.json"
 	var file = FileAccess.open(meta_path, FileAccess.READ)
 	if not file:
 		print("Error loading metadata file: ", FileAccess.get_open_error())
+		queue_free()
 		return
 	var bytes = file.get_buffer(file.get_length())
-	var json_string = bytes.get_string_from_utf16()
+	var json_string = get_json_string_with_utf_detection(bytes)
+	
+	if json_string == "":
+		print("Error loading JSON file: File is empty or unsupported format")
+		queue_free()
+		return
 	var json = JSON.new()
 	var error = json.parse(json_string)
 	var metadata
@@ -75,3 +82,13 @@ func _init_song_data():
 				$AuthorNames.text = metadata.performedBy[i]
 			_:
 				$AuthorNames.text += ", %s" % metadata.performedBy[i]
+
+func get_json_string_with_utf_detection(bytes : PackedByteArray) -> String:
+	if bytes.size() >= 2:
+		var byte0 = bytes[0]
+		var byte1 = bytes[1]
+		if byte0 == 0xFF and byte1 == 0xFE:
+			return bytes.get_string_from_utf16()
+		if byte0 == 0xFE and byte1 == 0xFF:
+			return bytes.get_string_from_utf16()
+	return bytes.get_string_from_utf8()
