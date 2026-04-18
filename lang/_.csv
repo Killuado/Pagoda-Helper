@@ -17,4 +17,6 @@ popup_cancel,Cancel,,Cancelar
 popup_warning,Warning!,,Aviso!
 popup_ok,Ok,,Ok
 popup_delete_song,Are you sure you wanna delete %s song(s)?\nThe deleted songs will be available at Recycle Bin.,,Você tem certeza que quer deletar %s música(s)?\nAs músicas deletadas estarão disponiveis na Lixeira.
-popup_delete_song_failed,Error deleting song: %s.\nError: %s,,Erro deletando a música: %s.\nErro: %s
+popup_delete_song_failed,Error deleting song: %s.\nError: %s,,Erro ao deletar a música: %s.\nErro: %s
+image_file_prompt,Image,,Imagem
+load_image,Load Image,,Carregar Imagem

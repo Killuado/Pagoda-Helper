@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dk4la8k31vvpq"]
 
 [ext_resource type="Script" uid="uid://062k27m2hx78" path="res://Scripts/SongDisplay/base_song.gd" id="1_rpt2r"]
-[ext_resource type="Texture2D" uid="uid://b7cgyan74bm7a" path="res://icon.svg" id="2_brqwk"]
+[ext_resource type="Texture2D" uid="uid://ci00mh2x8u1rk" path="res://Sprites/SongDisplay/dvd-disk-iconuxwing.com.svg" id="2_rpt2r"]
 [ext_resource type="Texture2D" uid="uid://4av6wmow3713" path="res://Sprites/SongDisplay/play-button-green-icon-uxwing.com.svg" id="3_0ic14"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8tt50"]
@@ -21,7 +21,6 @@ offset_right = 468.0
 offset_bottom = 169.0
 script = ExtResource("1_rpt2r")
 wait_ready = true
-song_folder = "C:\\Users\\%username%\\AppData\\Local\\Pagoda\\Saved\\ImportedSongs\\Running For Your Life - Wuthering Waves"
 
 [node name="SongImg" type="TextureButton" parent="." unique_id=966662126]
 layout_mode = 0
@@ -29,7 +28,7 @@ offset_left = 5.0
 offset_top = 18.0
 offset_right = 67.0
 offset_bottom = 80.0
-texture_normal = ExtResource("2_brqwk")
+texture_normal = ExtResource("2_rpt2r")
 ignore_texture_size = true
 stretch_mode = 0
 

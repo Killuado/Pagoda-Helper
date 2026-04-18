@@ -27,9 +27,32 @@ func _ready() -> void:
 	_init_song_data()
 	$Selected.disabled = false
 	$Selected.toggled.connect(on_selected_toggle)
+	$SongImg.pressed.connect(select_image_prompt)
 	play_stop_button.pressed.connect(_play_song)
 	pass
 
+func select_image_prompt():
+	if MainFileDialog.in_use:
+		return
+	MainFileDialog.in_use = true
+	MainFileDialog.load_image_dialog()
+	MainFileDialog.canceled.connect(cancel_select_image)
+	MainFileDialog.file_selected.connect(select_image)
+	MainFileDialog.popup_centered()
+
+func select_image(path):
+	MainFileDialog.in_use = false
+	MainFileDialog.canceled.disconnect(cancel_select_image)
+	MainFileDialog.file_selected.disconnect(select_image)
+	var img = Image.load_from_file(path)
+	if img:
+		$SongImg.texture_normal = ImageTexture.create_from_image(img)
+		img.save_jpg(song_folder + "/logo.jpg", 0.8)
+
+func cancel_select_image():
+	MainFileDialog.in_use = false
+	MainFileDialog.canceled.disconnect(cancel_select_image)
+	MainFileDialog.file_selected.disconnect(select_image)
 
 func on_selected_toggle(toggled_on : bool):
 	if toggled_on:

@@ -1,5 +1,8 @@
 extends HBoxContainer
 
+
+var version = "0.1"
+
 @export var username : String = ""
 @onready var songs_container = %SongsContainer
 
@@ -15,6 +18,7 @@ var selected_folders : Array[String]
 var songs_directory
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$TabsMainContainer/Version.text = "V" + version
 	set_default_locale()
 	if OS.has_environment("USERNAME"):
 		username = OS.get_environment("USERNAME")
@@ -43,7 +47,10 @@ func _delete_songs():
 	MainAcceptDialog.canceled.disconnect(_delete_cancel)
 	MainAcceptDialog.confirmed.disconnect(_delete_songs)
 	for i in selected_folders:
-		OS.move_to_trash(i)
+		var err = OS.move_to_trash(i)
+		if err != OK:
+			MainAcceptDialog.failed_delete_prompt(i, err)
+			MainAcceptDialog.popup_centered()
 	load_imported_songs_list()
 
 func _delete_cancel():

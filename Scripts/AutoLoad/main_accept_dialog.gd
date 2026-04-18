@@ -9,7 +9,7 @@ var cancel_button : Button
 func _ready() -> void:
 	get_label().horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 
-func failed_delete_prompt(_name,path,error):
+func failed_delete_prompt(_name,error):
 	if cancel_button:
 		remove_button(cancel_button)
 		cancel_button = null
