@@ -18,6 +18,16 @@ config/icon="res://icon.svg"
 [autoload]
 
 MusicPlayer="*uid://b0o8ws8igquq7"
+MainFileDialog="*uid://demi5xa6da3y5"
+MainAcceptDialog="*uid://dk5s52u3w4b7h"
+
+[global_group]
+
+MainContainer=""
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://lang/main.en.translation", "res://lang/main.pt_BR.translation")
 
 [physics]
 

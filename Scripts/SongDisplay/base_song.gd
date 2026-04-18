@@ -6,10 +6,12 @@ class_name BaseSong
 @export var song_folder : String
 
 @onready var play_stop_button = $PlayStopButton
+
+@onready var main_container = get_tree().get_first_node_in_group("MainContainer")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#assert(not song_folder == "", "Invalid Song Folder") -- Enable for error throwing in editor
-	if wait_ready:
+	#assert(not song_folder == "", "Invalid Song Folder") -- Enable line for error throwing in editor
+	if wait_ready: #if testing in editor as MainContainer is not an autoload, could be swapped to OS.has_feature("Engine") or something like that
 		await(get_tree().create_timer(0.01).timeout)
 	var parent = get_parent()
 	if not parent is MarginContainer:
@@ -23,9 +25,18 @@ func _ready() -> void:
 		reparent(margin)
 	#song_folder = song_folder.replace("%username%", %MainContainer.username)
 	_init_song_data()
+	$Selected.disabled = false
+	$Selected.toggled.connect(on_selected_toggle)
 	play_stop_button.pressed.connect(_play_song)
 	pass
 
+
+func on_selected_toggle(toggled_on : bool):
+	if toggled_on:
+		main_container.selected_folders.push_back(song_folder)
+	else:
+		main_container.selected_folders.erase(song_folder)
+	print(main_container.selected_folders)
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -67,13 +78,13 @@ func _init_song_data():
 	var metadata
 	if error == OK:
 		metadata = json.data
-		print(metadata)
+		#print(metadata)
 	else:
 		print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line()) #error print from godot documentation
 		queue_free()
 		return
 	$SongName.text = metadata.songName
-	$AuthorNames.text = "No Authors Set"
+	$AuthorNames.text = tr("authors_empty")
 	#$BPM.text = tr("bpm") % metadata.tempo
 	$BPM.text = "BPM: %d" % metadata.tempo
 	for i in metadata.performedBy.size():
@@ -82,6 +93,14 @@ func _init_song_data():
 				$AuthorNames.text = metadata.performedBy[i]
 			_:
 				$AuthorNames.text += ", %s" % metadata.performedBy[i]
+	
+	if files.has("logo.jpg"):
+		var img = Image.load_from_file(song_folder + "/logo.jpg")
+		var logo = ImageTexture.create_from_image(img)
+		if logo:
+			$SongImg.texture_normal = logo
+	else:
+		$SongImg.texture_normal = preload("uid://ci00mh2x8u1rk")
 
 func get_json_string_with_utf_detection(bytes : PackedByteArray) -> String:
 	if bytes.size() >= 2:

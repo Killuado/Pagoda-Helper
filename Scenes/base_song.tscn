@@ -31,7 +31,7 @@ offset_right = 67.0
 offset_bottom = 80.0
 texture_normal = ExtResource("2_brqwk")
 ignore_texture_size = true
-stretch_mode = 4
+stretch_mode = 0
 
 [node name="SongName" type="Label" parent="." unique_id=982949308]
 layout_mode = 0
@@ -88,3 +88,4 @@ offset_right = 262.0
 offset_bottom = 24.0
 theme_override_colors/checkbox_checked_color = Color(0.29411766, 1, 0, 1)
 theme_override_colors/checkbox_unchecked_color = Color(0, 0, 0, 1)
+disabled = true

@@ -1,0 +1,20 @@
+key,en,?plural,pt_BR
+translation_authors,Killuado,,Killuado
+app_name,Pagoda Helper,,Pagoda Helper
+song,Song,,Música
+songs,Songs,,Músicas
+imported_songs,Imported Songs,,Músicas Importadas
+bpm,BPM: %d,,BPM: %d
+authors_empty,No Author(s) Set,,Autor(es) não definido(s).
+reload_button,Reload Song List,,Recaregar Lista de Músicas
+reloading,Reloading...,,Recarregando...
+export_button,Export Selected,,Exportar Seleção
+import_button,Import Song(s),,Importar Música(s)
+delete_button,Delete Selected,,Apagar Selecionado(s)
+export_title,Export Song,,Exportar Música
+popup_confirm,Confirm,,Confirmar
+popup_cancel,Cancel,,Cancelar
+popup_warning,Warning!,,Aviso!
+popup_ok,Ok,,Ok
+popup_delete_song,Are you sure you wanna delete %s song(s)?\nThe deleted songs will be available at Recycle Bin.,,Você tem certeza que quer deletar %s música(s)?\nAs músicas deletadas estarão disponiveis na Lixeira.
+popup_delete_song_failed,Error deleting song: %s.\nError: %s,,Erro deletando a música: %s.\nErro: %s
