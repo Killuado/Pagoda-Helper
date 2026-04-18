@@ -1,0 +1,137 @@
+[gd_scene format=3 uid="uid://qlw6u1ixbay2"]
+
+[ext_resource type="Script" uid="uid://pcu6c0a1kjos" path="res://Scripts/main_script.gd" id="1_yihkk"]
+[ext_resource type="PackedScene" uid="uid://dk4la8k31vvpq" path="res://Scenes/base_song.tscn" id="2_3e2vk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8tt50"]
+bg_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6gbvi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6gbvi"]
+bg_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3e2vk"]
+bg_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+
+[node name="Main" type="Control" unique_id=685817550]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainContainer" type="HBoxContainer" parent="." unique_id=540016073]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+script = ExtResource("1_yihkk")
+
+[node name="TabsMainContainer" type="PanelContainer" parent="MainContainer" unique_id=969833159]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8tt50")
+
+[node name="TabsContainer" type="VBoxContainer" parent="MainContainer/TabsMainContainer" unique_id=784284352]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="SeparatorStartTitle" type="MarginContainer" parent="MainContainer/TabsMainContainer/TabsContainer" unique_id=1110669415]
+layout_mode = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 45
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 0
+
+[node name="HSeparator" type="HSeparator" parent="MainContainer/TabsMainContainer/TabsContainer/SeparatorStartTitle" unique_id=695648207]
+visible = false
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MainContainer/TabsMainContainer/TabsContainer" unique_id=885778732]
+layout_mode = 2
+text = "Pagoda Helper"
+label_settings = SubResource("LabelSettings_6gbvi")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SeparatorStartButtons" type="MarginContainer" parent="MainContainer/TabsMainContainer/TabsContainer" unique_id=2031339860]
+z_index = 1
+layout_mode = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = -2000
+theme_override_constants/margin_bottom = 5
+
+[node name="HSeparator" type="HSeparator" parent="MainContainer/TabsMainContainer/TabsContainer/SeparatorStartButtons" unique_id=635917024]
+layout_mode = 2
+
+[node name="SongsTabButton" type="Button" parent="MainContainer/TabsMainContainer/TabsContainer" unique_id=1136605633]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_stretch_ratio = 0.68
+text = "Songs"
+
+[node name="TabContainer" type="VBoxContainer" parent="MainContainer" unique_id=798238963]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="TitleMainContainer" type="PanelContainer" parent="MainContainer/TabContainer" unique_id=1693650303]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+theme_override_styles/panel = SubResource("StyleBoxFlat_6gbvi")
+
+[node name="TitleContainerContainer" type="HBoxContainer" parent="MainContainer/TabContainer/TitleMainContainer" unique_id=1924444326]
+custom_minimum_size = Vector2(0, 79)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="TitleMargin" type="MarginContainer" parent="MainContainer/TabContainer/TitleMainContainer/TitleContainerContainer" unique_id=1901484015]
+layout_mode = 2
+theme_override_constants/margin_left = 27
+
+[node name="TitleLabel" type="Label" parent="MainContainer/TabContainer/TitleMainContainer/TitleContainerContainer/TitleMargin" unique_id=204540164]
+layout_mode = 2
+text = "Imported Songs"
+
+[node name="SongsTab" type="PanelContainer" parent="MainContainer/TabContainer" unique_id=1949294153]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_3e2vk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/TabContainer/SongsTab" unique_id=1195025385]
+layout_mode = 2
+
+[node name="SongsContainer" type="FlowContainer" parent="MainContainer/TabContainer/SongsTab/VBoxContainer" unique_id=732095355]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MainContainer/TabContainer/SongsTab/VBoxContainer/SongsContainer" unique_id=1595675490]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="MainContainer/TabContainer/SongsTab/VBoxContainer" unique_id=1488339507]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="BaseSong" parent="." unique_id=164003104 instance=ExtResource("2_3e2vk")]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 264.0
+offset_bottom = 86.0

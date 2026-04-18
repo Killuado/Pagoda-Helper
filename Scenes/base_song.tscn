@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://dk4la8k31vvpq"]
+
+[ext_resource type="Script" uid="uid://062k27m2hx78" path="res://Scripts/SongDisplay/base_song.gd" id="1_rpt2r"]
+[ext_resource type="Texture2D" uid="uid://b7cgyan74bm7a" path="res://icon.svg" id="2_brqwk"]
+[ext_resource type="Texture2D" uid="uid://4av6wmow3713" path="res://Sprites/SongDisplay/play-button-green-icon-uxwing.com.svg" id="3_0ic14"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8tt50"]
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_yihkk"]
+font_size = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_1htwo"]
+font_size = 10
+
+[node name="BaseSong" type="Panel" unique_id=164003104]
+custom_minimum_size = Vector2(264, 86)
+offset_left = 204.0
+offset_top = 83.0
+offset_right = 468.0
+offset_bottom = 169.0
+script = ExtResource("1_rpt2r")
+wait_ready = true
+song_folder = "C:\\Users\\%username%\\AppData\\Local\\Pagoda\\Saved\\ImportedSongs\\Running For Your Life - Wuthering Waves"
+
+[node name="SongImg" type="TextureButton" parent="." unique_id=966662126]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 18.0
+offset_right = 67.0
+offset_bottom = 80.0
+texture_normal = ExtResource("2_brqwk")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="SongName" type="Label" parent="." unique_id=982949308]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 1.0
+offset_right = 240.0
+offset_bottom = 24.0
+text = "Song_Name"
+label_settings = SubResource("LabelSettings_8tt50")
+text_overrun_behavior = 5
+
+[node name="AuthorNames" type="Label" parent="." unique_id=1686018590]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 26.0
+offset_right = 224.0
+offset_bottom = 59.0
+text = "Author_Names"
+label_settings = SubResource("LabelSettings_yihkk")
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+text_overrun_behavior = 5
+max_lines_visible = 2
+
+[node name="BPM" type="Label" parent="." unique_id=1033394483]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 63.0
+offset_right = 123.0
+offset_bottom = 77.0
+text = "BPM: 1"
+label_settings = SubResource("LabelSettings_1htwo")
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+text_overrun_behavior = 5
+max_lines_visible = 2
+
+[node name="PlayStopButton" type="TextureButton" parent="." unique_id=124695982]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 28.0
+offset_right = 254.0
+offset_bottom = 58.0
+texture_normal = ExtResource("3_0ic14")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Selected" type="CheckBox" parent="." unique_id=224383189]
+layout_mode = 0
+offset_left = 238.0
+offset_right = 262.0
+offset_bottom = 24.0
+theme_override_colors/checkbox_checked_color = Color(0.29411766, 1, 0, 1)
+theme_override_colors/checkbox_unchecked_color = Color(0, 0, 0, 1)
