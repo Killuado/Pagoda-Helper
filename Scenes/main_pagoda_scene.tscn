@@ -117,7 +117,11 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_3e2vk")
 [node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/TabContainer/SongsTab" unique_id=1195025385]
 layout_mode = 2
 
-[node name="SongsContainer" type="FlowContainer" parent="MainContainer/TabContainer/SongsTab/VBoxContainer" unique_id=732095355]
+[node name="ScrollContainer" type="ScrollContainer" parent="MainContainer/TabContainer/SongsTab/VBoxContainer" unique_id=728207688]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SongsContainer" type="FlowContainer" parent="MainContainer/TabContainer/SongsTab/VBoxContainer/ScrollContainer" unique_id=732095355]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3

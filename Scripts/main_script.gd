@@ -1,7 +1,7 @@
 extends HBoxContainer
 
 
-var version = "0.1"
+var version = "0.1.1"
 
 @export var username : String = ""
 @onready var songs_container = %SongsContainer
@@ -32,6 +32,9 @@ func _ready() -> void:
 	import_button.pressed.connect(_import_songs_prompt)
 	delete_button.pressed.connect(_delete_songs_prompt)
 	update_translations()
+	%SongsContainer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	%SongsContainer.size_flags_vertical = SIZE_EXPAND_FILL
+	%SongsContainer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
 func _delete_songs_prompt():
 	if selected_folders.is_empty() or MainAcceptDialog.in_use:
