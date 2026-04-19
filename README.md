@@ -4,7 +4,7 @@
 Makes getting User Generated Content easier!
 
 
-
+**DISCLAIMER: By using this application you agree to Dead as Disco TOS and/or EULA aswell as agree not exporting or sharing songs which you don't have the rights to do so, you have total responsabilities of your actions!**
 
 
 ## Features
