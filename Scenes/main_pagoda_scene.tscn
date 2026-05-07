@@ -149,6 +149,12 @@ layout_mode = 2
 size_flags_vertical = 4
 text = "Reload Song List"
 
+[node name="Select_All_Button" type="Button" parent="MainContainer/TabContainer/SongsTab/VBoxContainer/PanelContainer/HBoxContainer" unique_id=1155031808]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 4
+text = "Select All Songs"
+
 [node name="Delete_Button" type="Button" parent="MainContainer/TabContainer/SongsTab/VBoxContainer/PanelContainer/HBoxContainer" unique_id=1373537341]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2

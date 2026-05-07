@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="Pagoda(DaD) Helper"
+config/version="0.1.3"
 run/main_scene="uid://qlw6u1ixbay2"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://fme8gnb1h1gn"
 
 [autoload]
 

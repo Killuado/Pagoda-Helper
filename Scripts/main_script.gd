@@ -1,7 +1,7 @@
 extends HBoxContainer
 
 
-var version = "0.1.2"
+var version = "0.1.3"
 
 @export var username : String = ""
 @onready var songs_container = %SongsContainer
@@ -13,6 +13,7 @@ var version = "0.1.2"
 @onready var export_button = $TabContainer/SongsTab/VBoxContainer/PanelContainer/HBoxContainer/Export_Button
 @onready var import_button = $TabContainer/SongsTab/VBoxContainer/PanelContainer/HBoxContainer/Import_Button
 @onready var delete_button = $TabContainer/SongsTab/VBoxContainer/PanelContainer/HBoxContainer/Delete_Button
+@onready var select_all_button = $TabContainer/SongsTab/VBoxContainer/PanelContainer/HBoxContainer/Select_All_Button
 
 var selected_folders : Array[String]
 var songs_directory
@@ -31,10 +32,31 @@ func _ready() -> void:
 	export_button.pressed.connect(_save_selected_songs_prompt)
 	import_button.pressed.connect(_import_songs_prompt)
 	delete_button.pressed.connect(_delete_songs_prompt)
+	select_all_button.pressed.connect(_select_all)
 	update_translations()
 	%SongsContainer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	%SongsContainer.size_flags_vertical = SIZE_EXPAND_FILL
 	%SongsContainer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+
+func _select_all():
+	var selected = 0
+	var not_selected = 0
+	var to_change : Array[CheckBox] = []
+	for i in $TabContainer/SongsTab/VBoxContainer/ScrollContainer/SongsContainer.get_children():
+		var index = i.get_child(0)
+		var selection_status : CheckBox = index.get_node("Selected")
+		to_change.push_back(selection_status)
+		if selection_status.button_pressed:
+			selected+=1
+		else:
+			not_selected+=1
+	if not_selected >= selected:
+		for i in to_change:
+			i.button_pressed = true
+	else:
+		for i in to_change:
+			i.button_pressed = false
+	#print(to_change)
 
 func _delete_songs_prompt():
 	if selected_folders.is_empty() or MainAcceptDialog.in_use:
@@ -119,9 +141,38 @@ func _save_selected_songs(path):
 		var song_folder = i.replace(songs_directory + "/", "")
 		print("Song Folder: ", song_folder)
 		for v in files:
-			writer.start_file(song_folder + "/" + v)
-			writer.write_file(FileAccess.get_file_as_bytes(i + "/%s" % v))
-			writer.close_file()
+			if v == "Meta.json":
+				var json_string = get_json_string_with_utf_detection(FileAccess.get_file_as_bytes(i + "/%s" % v))
+				var json = JSON.new()
+				var error = json.parse(json_string)
+				var metadata
+				if error == OK:
+					metadata = json.data
+					#print(metadata)
+				else:
+					print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line()) #error print from godot documentation
+					queue_free()
+					return
+				if not metadata:
+					print("Error in exporting meta.json even tho it returned OK")
+					return
+				print("Antes: ", metadata)
+				metadata.erase("originalAudioFileHash")
+				metadata.erase("originalAudioFilePath")
+				if metadata.has("uniqueId"):
+					metadata["uniqueId"] = int(metadata["uniqueId"])
+				if metadata.has("seed"):
+					metadata["seed"] = int(metadata["seed"])
+				var json_new_string = JSON.stringify(metadata, "\t")
+				var data_buffer = json_new_string.to_utf8_buffer()
+				print("Depois: ", metadata)
+				writer.start_file(song_folder + "/" + v)
+				writer.write_file(data_buffer)
+				writer.close_file()
+			else:
+				writer.start_file(song_folder + "/" + v)
+				writer.write_file(FileAccess.get_file_as_bytes(i + "/%s" % v))
+				writer.close_file()
 	writer.close()
 
 func _save_cancel():
@@ -158,7 +209,17 @@ func update_translations():
 	export_button.text = tr("export_button")
 	import_button.text = tr("import_button")
 	delete_button.text = tr("delete_button")
+	select_all_button.text = tr("select_all_songs")
 
+func get_json_string_with_utf_detection(bytes : PackedByteArray) -> String:
+	if bytes.size() >= 2:
+		var byte0 = bytes[0]
+		var byte1 = bytes[1]
+		if byte0 == 0xFF and byte1 == 0xFE:
+			return bytes.get_string_from_utf16()
+		if byte0 == 0xFE and byte1 == 0xFF:
+			return bytes.get_string_from_utf16()
+	return bytes.get_string_from_utf8()
 
 #EXTRACT CODE FROM GODOT DOCS:
 # Extract all files from a ZIP archive, preserving the directories within.

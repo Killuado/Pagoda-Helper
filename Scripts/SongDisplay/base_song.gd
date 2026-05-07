@@ -59,7 +59,7 @@ func on_selected_toggle(toggled_on : bool):
 		main_container.selected_folders.push_back(song_folder)
 	else:
 		main_container.selected_folders.erase(song_folder)
-	print(main_container.selected_folders)
+	#print(main_container.selected_folders)
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
@@ -75,7 +75,7 @@ func _play_song():
 
 func _init_song_data():
 	var files = DirAccess.get_files_at(song_folder) #returns array with Filen
-	print(files)
+	#print(files)
 	
 	if files.is_empty() or not files.has("Audio.ogg") or not files.has("Meta.json"): #NO SONG DATA
 		push_error("NO SONG DATA")
@@ -90,7 +90,7 @@ func _init_song_data():
 		queue_free()
 		return
 	var bytes = file.get_buffer(file.get_length())
-	var json_string = get_json_string_with_utf_detection(bytes)
+	var json_string = main_container.get_json_string_with_utf_detection(bytes)
 	
 	if json_string == "":
 		print("Error loading JSON file: File is empty or unsupported format")
@@ -124,13 +124,3 @@ func _init_song_data():
 			$SongImg.texture_normal = logo
 	else:
 		$SongImg.texture_normal = preload("uid://ci00mh2x8u1rk")
-
-func get_json_string_with_utf_detection(bytes : PackedByteArray) -> String:
-	if bytes.size() >= 2:
-		var byte0 = bytes[0]
-		var byte1 = bytes[1]
-		if byte0 == 0xFF and byte1 == 0xFE:
-			return bytes.get_string_from_utf16()
-		if byte0 == 0xFE and byte1 == 0xFF:
-			return bytes.get_string_from_utf16()
-	return bytes.get_string_from_utf8()
