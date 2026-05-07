@@ -20,3 +20,4 @@ popup_delete_song,Are you sure you wanna delete %s song(s)?\nThe deleted songs w
 popup_delete_song_failed,Error deleting song: %s.\nError: %s,,Erro ao deletar a música: %s.\nErro: %s
 image_file_prompt,Image,,Imagem
 load_image,Load Image,,Carregar Imagem
+select_all_songs,Select All Songs,,Selecionar Tudo
